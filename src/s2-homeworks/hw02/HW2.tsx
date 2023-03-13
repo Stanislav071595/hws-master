@@ -17,7 +17,7 @@ import s2 from '../../s1-main/App.module.css'
 * */
 
 // types
-export type AffairPriorityType = 'low' | 'middle' | 'high' | 'all'
+export type AffairPriorityType = 'low' | 'middle' | 'high'
 
 export type AffairType = {
     _id: number
@@ -36,8 +36,8 @@ const defaultAffairs: AffairType[] = [
 ]
 
 // pure helper functions
-export const filterAffairs = (affairs: AffairType[], filter: AffairPriorityType): AffairType[] => {
-    if (filter === 'all') return defaultAffairs
+export const filterAffairs = (affairs: AffairType[], filter: FilterType): AffairType[] => {
+    if (filter === 'all') return affairs
     return  affairs.filter(item => item.priority === filter)
 
 }
@@ -47,7 +47,7 @@ export const deleteAffair = (affairs: AffairType[], _id: number): AffairType[] =
 
 export function HW2() {
     const [affairs, setAffairs] = useState<AffairType[]>(defaultAffairs)
-    const [filter, setFilter] = useState<AffairPriorityType>('all')
+    const [filter, setFilter] = useState<FilterType>('all')
 
     const filteredAffairs = filterAffairs(affairs, filter)
     const deleteAffairCallback = (_id: number) => {
